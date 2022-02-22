@@ -16,10 +16,14 @@ const login=(req,res)=>{
 const getAllPets= async (req,res)=>{
 
   let limit=req.query.limit
-
+  let page=req.query.page
   if(!limit)
   {
     limit=10
+  }
+  if(!page)
+  {
+    limit=0
   }
 
   const result=await Pet.find({},(err,data)=>{
