@@ -3,6 +3,16 @@ const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
 const date=new Date()
 
+require('dotenv').config();
+
+const login=(req,res)=>{
+  const name=req.body.username
+  const password=req.body.password
+  const user={name:name,password:password} 
+  const accessToken=jwt.sign(user,process.env.strForJWT)  
+  res.status(200).json({accessToken:accessToken})
+}
+
 const getAllPets= async (req,res)=>{
 
   let limit=req.query.limit
@@ -102,4 +112,4 @@ const petsAges= async (req,res)=>{
     })
   
 }
-module.exports = {getAllPets,addPet,deletePet,petsAges}
+module.exports = {login,getAllPets,addPet,deletePet,petsAges}
